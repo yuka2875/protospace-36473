@@ -28,22 +28,21 @@
 
 ### Association
 
-- has_many :room_users
-- has_many :users, through: :room_users
-- has_many :messages
+- belongs_to :users
+- belongs_to :prototypes
 
 ## prototypes テーブル
 
-| Column | Type       | Options                        |
-| ------ | ---------- | ------------------------------ |
-| title   | string | null: false |
-| catch_copy   | text | null: false |
-| concept   | text | null: false |
-| user   | references | null: false, references|
+| Column     | Type       | Options                      |
+| ---------- | ---------- | ---------------------------- |
+| title      | string     | null: false                  |
+| catch_copy | text       | null: false                  |
+| concept    | text       | null: false                  |
+| user       | references | null: false, references      |
 
 ### Association
 
-- belongs_to :room
-- belongs_to :user
+- has_many :comments
+- belongs_to :users
 
 
