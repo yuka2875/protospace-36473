@@ -8,6 +8,7 @@ class PrototypesController < ApplicationController
   end
 
   def create
+    
   end
   
   
