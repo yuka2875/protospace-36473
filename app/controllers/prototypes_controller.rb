@@ -1,9 +1,5 @@
 class PrototypesController < ApplicationController
 
-  def index
-    @users = User.all
-    
-  end
 
   def new
     
@@ -13,8 +9,7 @@ class PrototypesController < ApplicationController
     
   end
 
-  def destroy
-  end
+  
 
   
   
