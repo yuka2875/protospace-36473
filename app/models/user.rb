@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
 
   has_many :prototype
+  has_many :comment
+
 
 
   validates :name, presence: true
