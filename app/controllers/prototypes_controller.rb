@@ -13,8 +13,8 @@ class PrototypesController < ApplicationController
   end
 
   def create
-    Prototype.create(prototype_params)
-    @prototype = Prototype.new
+    @prototype = Prototype.create(prototype_params)
+    
     
     if @prototype.update(prototype_params)
       redirect_to root_path
