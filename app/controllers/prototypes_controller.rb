@@ -1,6 +1,8 @@
 class PrototypesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :destroy]
-  before_action :move_to_index, except: [:index, :show, :new, :edit, :destroy, :update]
+  before_action :authenticate_user!, only: [:new, :create, :destoroy, :edit, :update]  #ユーザーがログインしていないとできない処理
+  # before_action :set_prototype, only: [:show, :edit, :update, :destoroy]
+
+  # before_action :move_to_index, except: [:index, :show, :edit, :update] #投稿者本人でないとできない処理
 
   def index
     @prototypes = Prototype.all
@@ -18,7 +20,7 @@ class PrototypesController < ApplicationController
     @prototype = Prototype.create(prototype_params)
     
     
-    if @prototype.save(prototype_params)
+    if @prototype.save
       redirect_to root_path
     else
       render :new
@@ -35,12 +37,14 @@ class PrototypesController < ApplicationController
 
   def edit
     @prototype = Prototype.find(params[:id])
+     unless @prototype.user_id == current_user.id
+      redirect_to action: :index
   end
+end
 
 
   def update
     @prototype = Prototype.find(params[:id])
-    @prototype.update(prototype_params)
 
     if @prototype.update(prototype_params)
       redirect_to prototype_path
@@ -65,13 +69,14 @@ class PrototypesController < ApplicationController
     params.require(:prototype).permit(:title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
   
   end
+end
 
-  def move_to_index
+  #def set_prototype
+  #  @prototype = Prototype.find(params[:id])
+  #end
 
-   unless user_signed_in? && current_user.id == @prototype
-    redirect_to action: :index
-   end
+  # def move_to_index
 
-  end
-
-  end
+  # unless user_signed_in? && current_user.id == @prototype
+  #  redirect_to action: :index
+  # end
